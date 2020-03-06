@@ -17,15 +17,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        viewModel.restoreState(savedInstanceState)
-        viewModel.changeRegister.observe(this, changeObserver)
         lifecycle.addObserver(viewModel)
+        viewModel.changeNotifier.observe(this, changeObserver)
         my_container.setOnClickListener { viewModel.increment() }
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        viewModel.saveState(outState)
     }
 
     private fun incrementCount(value: Int) {
